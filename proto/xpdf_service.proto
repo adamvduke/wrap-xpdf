@@ -1,0 +1,15 @@
+syntax = "proto3";
+package xpdf;
+option go_package = "xpdfpb/";
+
+message GetExtractedTextRequest{
+    optional bytes content = 1;
+}
+
+message GetExtractedTextResponse{
+    optional bytes content = 1;
+}
+
+service PdfToText {
+    rpc GetExtractedText(GetExtractedTextRequest) returns (GetExtractedTextResponse) {}
+}
