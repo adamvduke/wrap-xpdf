@@ -62,4 +62,4 @@ protoc --cpp_out=. server.proto
 ## License
 Any code from the [xpdf](https://www.xpdfreader.com/opensource.html) or [grpc](https://github.com/grpc/grpc) projects retains its original license.
 
-Other code is subject to the license in the [LICENSE](https://github.com/adamvduke/wrap-extract/blob/main/LICENSE) file.
+Other code is subject to the license in the [LICENSE](https://github.com/adamvduke/wrap-xpdf/blob/main/LICENSE) file.
