@@ -8,7 +8,7 @@ import (
 	"google.golang.org/grpc"
 	"google.golang.org/grpc/credentials/insecure"
 
-	pb "xpdf-client/xpdfpb"
+	pb "github.com/adamvduke/wrap-xpdf/go/xpdf-client/xpdfpb"
 )
 
 type XpdfRpcClient struct {
