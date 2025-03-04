@@ -7,8 +7,8 @@ import (
 	"log"
 	"os"
 
-	cgo "github.com/adamvduke/wrap-xpdf/go/xpdf-client/cgoclient"
-	rpc "github.com/adamvduke/wrap-xpdf/go/xpdf-client/grpcclient"
+	cgo "github.com/adamvduke/wrap-xpdf/go/cgoclient"
+	rpc "github.com/adamvduke/wrap-xpdf/go/grpcclient"
 )
 
 //go:generate protoc --go_out=../ --go-grpc_out=../ --proto_path=../../proto/ ../../proto/xpdf_service.proto
