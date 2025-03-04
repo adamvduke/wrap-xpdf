@@ -1,4 +1,4 @@
-module github.com/adamvduke/wrap-xpdf/go/xpdf-client/xpdfpb
+module github.com/adamvduke/wrap-xpdf/go/xpdfpb
 
 go 1.24.0
 
