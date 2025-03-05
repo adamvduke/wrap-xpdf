@@ -1,8 +1,7 @@
 package cgoclient
 
-// #cgo CFLAGS: -I../../cpp/
-// #cgo CXXFLAGS: -I../../cpp/
-// #cgo LDFLAGS: -L../../cpp/cmake/build -lextract
+// #cgo CXXFLAGS: -I${SRCDIR}/extract
+// #cgo LDFLAGS: -L${SRCDIR}/extract -lextract
 // #include "stdlib.h"
 // #include "wrap_extract.h"
 import "C"
