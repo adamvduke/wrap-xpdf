@@ -23,22 +23,24 @@ int extractPdfText(std::string input, std::stringstream *outstream)
     if (globalParams == NULL)
     {
         globalParams = new GlobalParams(NULL);
+        globalParams->setTextPageBreaks(gFalse);
     }
 
-    globalParams->setTextPageBreaks(gFalse);
     Object obj;
     obj.initNull();
+
+    // PDFDoc takes over ownership and takes care of releasing the stream at destruction.
     MemStream *dataStr = new MemStream(input.data(), Guint(0), Guint(input.length()), &obj);
-    PDFDoc *doc = new PDFDoc(dataStr);
+    PDFDoc doc(dataStr);
 
     /* probably not a pdf */
-    if (!doc->isOk())
+    if (!doc.isOk())
     {
         return -1;
     }
 
     int firstPage = 1;
-    int lastPage = doc->getNumPages();
+    int lastPage = doc.getNumPages();
     double fixedPitch = 0;
     GBool clipText = gFalse;
     GBool discardDiag = gFalse;
@@ -49,7 +51,6 @@ int extractPdfText(std::string input, std::stringstream *outstream)
     double marginBottom = 0;
 
     TextOutputControl textOutControl;
-    TextOutputDev *textOut;
     textOutControl.mode = textOutTableLayout;
     textOutControl.fixedPitch = fixedPitch;
     textOutControl.clipText = clipText;
@@ -59,14 +60,11 @@ int extractPdfText(std::string input, std::stringstream *outstream)
     textOutControl.marginRight = marginRight;
     textOutControl.marginTop = marginTop;
     textOutControl.marginBottom = marginBottom;
-    textOut = new TextOutputDev(&outputToStream, outstream, &textOutControl);
-    if (textOut->isOk())
+    TextOutputDev textOut(&outputToStream, outstream, &textOutControl);
+    if (textOut.isOk())
     {
-        doc->displayPages(textOut, firstPage, lastPage, 72, 72, 0, gFalse, gTrue, gFalse);
+        doc.displayPages(&textOut, firstPage, lastPage, 72, 72, 0, gFalse, gTrue, gFalse);
     }
-
-    delete textOut;
-    delete doc;
 
     return outstream->str().length();
 }
