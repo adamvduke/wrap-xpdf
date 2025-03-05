@@ -1,7 +1,7 @@
 package cgoclient
 
-// #cgo CXXFLAGS: -I${SRCDIR}/extract
-// #cgo LDFLAGS: -L${SRCDIR}/extract -lextract
+// #cgo CXXFLAGS: -I${SRCDIR}
+// #cgo LDFLAGS: -L${SRCDIR} -lextract
 // #include "stdlib.h"
 // #include "wrap_extract.h"
 import "C"
