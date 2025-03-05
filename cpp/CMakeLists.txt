@@ -85,6 +85,16 @@ add_library(extract
     "${xpdf_SOURCE_DIR}/xpdf/TextOutputDev.cc"
 )
 
+add_custom_command(TARGET extract POST_BUILD
+	COMMAND ${CMAKE_COMMAND} -E copy_if_different
+        "${CMAKE_CURRENT_SOURCE_DIR}/cmake/build/libextract.a"
+        "${CMAKE_CURRENT_SOURCE_DIR}/../go/cgoclient/extract/")
+
+add_custom_command(TARGET extract POST_BUILD
+	COMMAND ${CMAKE_COMMAND} -E copy_if_different
+        "${CMAKE_CURRENT_SOURCE_DIR}/extract.h"
+        "${CMAKE_CURRENT_SOURCE_DIR}/../go/cgoclient/extract/")
+
 target_link_libraries(extract
   absl::absl_log
   absl::log_initialize
