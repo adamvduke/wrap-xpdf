@@ -12,9 +12,13 @@ int wrap_extract(void *in, size_t len, void *out)
   char *pdf_data = (char *)in;
   std::string as_string(pdf_data, len);
   std::stringstream outstream;
-  extractPdfText(as_string, &outstream);
+  int outlen = extractPdfText(as_string, &outstream);
+  if (outlen == -1)
+  {
+    return outlen;
+  }
+
   std::string out_data = outstream.str();
-  int outlen = out_data.length();
   memcpy(out, out_data.c_str(), outlen);
   return outlen;
 }

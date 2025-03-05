@@ -18,7 +18,7 @@ static void outputToStream(void *stream, const char *text, int len)
     out->flush();
 }
 
-void extractPdfText(std::string input, std::stringstream *outstream)
+int extractPdfText(std::string input, std::stringstream *outstream)
 {
     if (globalParams == NULL)
     {
@@ -30,6 +30,12 @@ void extractPdfText(std::string input, std::stringstream *outstream)
     obj.initNull();
     MemStream *dataStr = new MemStream(input.data(), Guint(0), Guint(input.length()), &obj);
     PDFDoc *doc = new PDFDoc(dataStr);
+
+    /* probably not a pdf */
+    if (!doc->isOk())
+    {
+        return -1;
+    }
 
     int firstPage = 1;
     int lastPage = doc->getNumPages();
@@ -58,8 +64,9 @@ void extractPdfText(std::string input, std::stringstream *outstream)
     {
         doc->displayPages(textOut, firstPage, lastPage, 72, 72, 0, gFalse, gTrue, gFalse);
     }
-    std::string textData = outstream->str();
 
     delete textOut;
     delete doc;
+
+    return outstream->str().length();
 }

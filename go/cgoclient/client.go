@@ -5,6 +5,7 @@ package cgoclient
 // #include "stdlib.h"
 // #include "wrap_extract.h"
 import "C"
+import "errors"
 
 type XpdfCgoClient struct{}
 
@@ -17,6 +18,9 @@ func (c *XpdfCgoClient) Extract(input []byte) ([]byte, error) {
 	outBuf := C.CBytes(out)
 	defer C.free(outBuf)
 	count := C.wrap_extract(cData, inSize, outBuf)
+	if count == -1 {
+		return nil, errors.New("cgo extract failed")
+	}
 	data := C.GoBytes(outBuf, count)
 	return data, nil
 }
