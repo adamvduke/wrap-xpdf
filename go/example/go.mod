@@ -2,15 +2,17 @@ module github.com/adamvduke/wrap-xpdf/go/example
 
 go 1.24.0
 
+replace github.com/adamvduke/wrap-xpdf/go/cgoclient => ../cgoclient
+
 require (
-	github.com/adamvduke/wrap-xpdf/go/cgoclient v0.0.0-20250305040702-b1295a661369
-	github.com/adamvduke/wrap-xpdf/go/grpcclient v0.0.0-20250305040702-b1295a661369
+	github.com/adamvduke/wrap-xpdf/go/cgoclient v0.0.0-20250305044355-8f1155e6e74a
+	github.com/adamvduke/wrap-xpdf/go/grpcclient v0.0.0-20250305044355-8f1155e6e74a
 )
 
 require (
-	github.com/adamvduke/wrap-xpdf/go/xpdfpb v0.0.0-20250305040702-b1295a661369 // indirect
+	github.com/adamvduke/wrap-xpdf/go/xpdfpb v0.0.0-20250305044355-8f1155e6e74a // indirect
 	golang.org/x/net v0.36.0 // indirect
-	golang.org/x/sys v0.30.0 // indirect
+	golang.org/x/sys v0.31.0 // indirect
 	golang.org/x/text v0.22.0 // indirect
 	google.golang.org/genproto/googleapis/rpc v0.0.0-20250303144028-a0af3efb3deb // indirect
 	google.golang.org/grpc v1.71.0 // indirect
