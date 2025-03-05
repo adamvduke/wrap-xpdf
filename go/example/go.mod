@@ -2,11 +2,9 @@ module github.com/adamvduke/wrap-xpdf/go/example
 
 go 1.24.0
 
-replace github.com/adamvduke/wrap-xpdf/go/cgoclient => ../cgoclient
-
 require (
-	github.com/adamvduke/wrap-xpdf/go/cgoclient v0.0.0-20250305044355-8f1155e6e74a
-	github.com/adamvduke/wrap-xpdf/go/grpcclient v0.0.0-20250305044355-8f1155e6e74a
+	github.com/adamvduke/wrap-xpdf/go/cgoclient v0.0.0-20250305155253-ef8f31df157d
+	github.com/adamvduke/wrap-xpdf/go/grpcclient v0.0.0-20250305155253-ef8f31df157d
 )
 
 require (

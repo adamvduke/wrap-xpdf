@@ -1,5 +1,7 @@
-github.com/adamvduke/wrap-xpdf/go/grpcclient v0.0.0-20250305044355-8f1155e6e74a h1:IUAqivIL1m1whghv1Y1lQ4lJtVIpU+rDoe3GuoY/AQ4=
-github.com/adamvduke/wrap-xpdf/go/grpcclient v0.0.0-20250305044355-8f1155e6e74a/go.mod h1:kdzSI1TOGQrLFytPtlgpC4tgvULApAjoZo3UUHKT3Mg=
+github.com/adamvduke/wrap-xpdf/go/cgoclient v0.0.0-20250305155253-ef8f31df157d h1:7epWrJJUi0wQN0kgQX0MCeynEZJj/5LPrv8xeUQkMxo=
+github.com/adamvduke/wrap-xpdf/go/cgoclient v0.0.0-20250305155253-ef8f31df157d/go.mod h1:BgE9VdPxJtPd7WRkfF40Y2hi9k6l4ZSAXNO0N64xCkc=
+github.com/adamvduke/wrap-xpdf/go/grpcclient v0.0.0-20250305155253-ef8f31df157d h1:xXkCy3oMZHVmI42nUanVljA5xDzO7UiLs1bHBw9dubs=
+github.com/adamvduke/wrap-xpdf/go/grpcclient v0.0.0-20250305155253-ef8f31df157d/go.mod h1:kdzSI1TOGQrLFytPtlgpC4tgvULApAjoZo3UUHKT3Mg=
 github.com/adamvduke/wrap-xpdf/go/xpdfpb v0.0.0-20250305044355-8f1155e6e74a h1:8JSPs77ZjMkE+pL8XZZGrFGI5VFoNMKOafqEIjqeJOA=
 github.com/adamvduke/wrap-xpdf/go/xpdfpb v0.0.0-20250305044355-8f1155e6e74a/go.mod h1:kZDbcLQDXXwH63OYrZv0T0iODKJ4Y2fdpcn8DTljoM8=
 github.com/go-logr/logr v1.4.2 h1:6pFjapn8bFcIbiKo3XT4j/BhANplGihG6tvd+8rYgrY=
