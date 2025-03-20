@@ -17,7 +17,11 @@ func (c *XpdfCgoClient) Extract(input []byte) ([]byte, error) {
 	out := make([]byte, len(input))
 	outBuf := C.CBytes(out)
 	defer C.free(outBuf)
-	count := C.wrap_extract(cData, inSize, outBuf)
+
+	// input and output buffers of the same size, because the output size
+	// is not known in advance, but it is guaranteed to be less than or equal
+	// to the input size
+	count := C.wrap_extract(cData, inSize, outBuf, inSize)
 	if count == -1 {
 		return nil, errors.New("cgo extract failed")
 	}

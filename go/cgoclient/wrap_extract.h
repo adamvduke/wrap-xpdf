@@ -11,8 +11,7 @@ extern "C" {
 /*
  * wrap_extract wraps extractPdfText in a C friendly interface for use in CGO.
 */
-int wrap_extract(void *in, size_t len, void *out);
-
+int wrap_extract(void *in, size_t in_size, void *out, size_t out_size);
 #ifdef __cplusplus
 }
 #endif
