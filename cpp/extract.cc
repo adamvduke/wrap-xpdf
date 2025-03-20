@@ -1,8 +1,7 @@
 #include <string>
 #include <sstream>
 #include <iostream>
-
-#include <stdio.h>
+#include <mutex>
 
 #include "GlobalParams.h"
 #include "Object.h"
@@ -10,6 +9,9 @@
 #include "TextOutputDev.h"
 #include "Stream.h"
 #include "gtypes.h"
+
+// Mutex to protect globalParams
+static std::mutex globalParamsMutex;
 
 static void outputToStream(void *stream, const char *text, int len)
 {
@@ -20,10 +22,13 @@ static void outputToStream(void *stream, const char *text, int len)
 
 int extractPdfText(std::string input, std::stringstream *outstream)
 {
-    if (globalParams == NULL)
     {
-        globalParams = new GlobalParams(NULL);
-        globalParams->setTextPageBreaks(gFalse);
+        std::lock_guard<std::mutex> lock(globalParamsMutex);
+        if (globalParams == NULL)
+        {
+            globalParams = new GlobalParams(NULL);
+            globalParams->setTextPageBreaks(gFalse);
+        }
     }
 
     Object obj;
