@@ -35,8 +35,8 @@ int extractPdfText(std::string input, std::stringstream *outstream)
     obj.initNull();
 
     // PDFDoc takes over ownership and takes care of releasing the stream at destruction.
-    MemStream *dataStr = new MemStream(input.data(), Guint(0), Guint(input.length()), &obj);
-    PDFDoc doc(dataStr);
+    std::unique_ptr<MemStream> dataStr = std::make_unique<MemStream>(input.data(), Guint(0), Guint(input.length()), &obj);
+    PDFDoc doc(dataStr.release());
 
     /* probably not a pdf */
     if (!doc.isOk())
