@@ -2,6 +2,8 @@
 #include <sstream>
 #include <iostream>
 #include <mutex>
+#include <memory>
+#include <utility>
 
 #include "GlobalParams.h"
 #include "Object.h"
@@ -18,13 +20,13 @@ constexpr size_t MAX_OUTPUT_SIZE = 10 * 1024 * 1024; // 10 MB
 
 static void outputToStream(void *stream, const char *text, int len)
 {
-    std::stringstream *out = (std::stringstream *)stream;
     if (len > MAX_OUTPUT_SIZE)
     {
         std::cerr << "Error: Output size exceeds maximum allowed limit." << std::endl;
         return;
     }
 
+    auto *out = static_cast<std::stringstream *>(stream);
     out->write(text, len);
     out->flush();
 }
@@ -50,7 +52,7 @@ int extractPdfText(std::string input, std::stringstream *outstream)
     obj.initNull();
 
     // PDFDoc takes over ownership and takes care of releasing the stream at destruction.
-    std::unique_ptr<MemStream> dataStr = std::make_unique<MemStream>(input.data(), Guint(0), Guint(input.length()), &obj);
+    auto dataStr = std::make_unique<MemStream>(input.data(), Guint(0), Guint(input.length()), &obj);
     PDFDoc doc(dataStr.release());
 
     /* probably not a pdf */
@@ -87,5 +89,5 @@ int extractPdfText(std::string input, std::stringstream *outstream)
         doc.displayPages(&textOut, firstPage, lastPage, 72, 72, 0, gFalse, gTrue, gFalse);
     }
 
-    return outstream->str().length();
+    return static_cast<int>(std::move(outstream->str()).length());
 }
