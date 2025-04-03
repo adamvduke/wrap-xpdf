@@ -13,15 +13,30 @@
 // Mutex to protect globalParams
 static std::mutex globalParamsMutex;
 
+// Define a max output size for safety
+constexpr size_t MAX_OUTPUT_SIZE = 10 * 1024 * 1024; // 10 MB
+
 static void outputToStream(void *stream, const char *text, int len)
 {
     std::stringstream *out = (std::stringstream *)stream;
+    if (len > MAX_OUTPUT_SIZE)
+    {
+        std::cerr << "Error: Output size exceeds maximum allowed limit." << std::endl;
+        return;
+    }
+
     out->write(text, len);
     out->flush();
 }
 
 int extractPdfText(std::string input, std::stringstream *outstream)
 {
+    if (input.empty() || outstream == nullptr)
+    {
+        std::cerr << "Error: Failed to extract text. Input is empty or null." << std::endl;
+        return -1;
+    }
+
     {
         std::lock_guard<std::mutex> lock(globalParamsMutex);
         if (globalParams == NULL)
@@ -41,6 +56,7 @@ int extractPdfText(std::string input, std::stringstream *outstream)
     /* probably not a pdf */
     if (!doc.isOk())
     {
+        std::cerr << "Error: Failed to initialize PDFDoc. Input may not be a valid PDF." << std::endl;
         return -1;
     }
 
